@@ -1,9 +1,14 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dbPath = path.join(__dirname, 'data', 'sheti-mitra.db');
+
+const dataDir = path.join(__dirname, 'data');
+fs.mkdirSync(dataDir, { recursive: true });
+
+const dbPath = path.join(dataDir, 'sheti-mitra.db');
 const db = new Database(dbPath);
 
 // Enable foreign keys
