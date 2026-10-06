@@ -12,6 +12,7 @@ const dbPath = path.join(dataDir, 'sheti-mitra.db');
 const db = new Database(dbPath);
 
 // Enable foreign keys
+// Enable foreign keys
 db.pragma('foreign_keys = ON');
 
 /* ============================================================================
