@@ -1,0 +1,19 @@
+{
+  "name": "ShetiMitra AI — शेतीचा स्मार्ट साथीदार",
+  "short_name": "ShetiMitra",
+  "description": "Multilingual (Marathi/Hindi/English) crop disease screening assistant. AI inference runs on the server and requires an internet connection.",
+  "lang": "mr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f8f5",
+  "theme_color": "#2e7d4f",
+  "icons": [
+    {
+      "src": "/img/bio.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

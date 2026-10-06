@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2e7d4f">
+  <title>ShetiMitra AI — शेतीचा स्मार्ट साथीदार</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">🌱</div><div><b>ShetiMitra AI</b><small id="tag">शेतीचा स्मार्ट साथीदार</small></div></div>
+  <nav>
+    <a href="#scan" id="navScan">रोग स्कॅन</a>
+    <a href="#medicines" id="navMed">औषधे</a>
+    <a href="#history" id="navHistory">इतिहास</a>
+    <a href="#about" id="navAbout">माहिती</a>
+    <div id="userArea" class="userArea"></div>
+    <select id="lang" aria-label="Language"><option value="mr">मराठी</option><option value="hi">हिंदी</option><option value="en">English</option></select>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <span class="pill">AI Crop Health</span>
+      <h1 id="heroTitle">पिकाचा फोटो द्या.<br><em>रोगाची प्राथमिक माहिती</em> मिळवा.</h1>
+      <p id="heroText">पीक निवडा, पानाचा फोटो अपलोड करा आणि संभाव्य रोग, लक्षणे व उपलब्ध शिफारस केलेल्या उत्पादनांची माहिती पहा.</p>
+      <a class="btn" href="#scan" id="heroBtn">आता स्कॅन करा →</a>
+    </div>
+    <div class="heroArt">🌾<span>📱</span>🌿</div>
+  </section>
+
+  <section id="scan" class="panel">
+    <div class="sectionHead">
+      <div><span class="eyebrow">01 / AI SCAN</span><h2 id="scanTitle">पिकाचा रोग स्कॅन करा</h2></div>
+      <span class="secure">🔒 सुरक्षित</span>
+    </div>
+
+    <div class="scanGrid">
+      <div class="drop" id="drop">
+        <div class="scanIcon">📷</div>
+        <h3 id="uploadTitle">पानाचा फोटो अपलोड करा</h3>
+        <p id="uploadText">JPG/PNG/WEBP • कमाल 8 MB</p>
+        <input id="file" type="file" accept="image/*">
+        <input id="cameraFile" type="file" accept="image/*" capture="environment">
+        <div class="uploadActions">
+          <label for="file" class="btn secondary" id="choose">फोटो निवडा</label>
+          <label for="cameraFile" class="btn cameraBtn" id="camera">कॅमेऱ्याने फोटो काढा</label>
+        </div>
+        <div id="fileName" class="fileName" aria-live="polite"></div>
+        <img id="preview" alt="निवडलेल्या पिकाच्या फोटोचा preview">
+      </div>
+
+      <div class="form">
+        <label id="cropLabel" for="crop">पीक</label>
+        <select id="crop" aria-label="Crop"></select>
+        <button class="btn" id="scanBtn" type="button">🔍 <span id="scanBtnText">रोग तपासा</span></button>
+        <div class="note" id="scanNote">फोटो स्पष्ट, चांगल्या प्रकाशात आणि रोगाची लक्षणे दिसतील असा ठेवा.</div>
+      </div>
+    </div>
+
+    <div id="result" aria-live="polite" aria-atomic="true"></div>
+  </section>
+
+  <section id="medicines" class="section">
+    <div class="sectionHead">
+      <div>
+        <span class="eyebrow">02 / MEDICINES &amp; BUY</span>
+        <h2 id="medTitle">या रोगासाठी योग्य उत्पादने</h2>
+      </div>
+      <span class="verified">✓ CIBRC Registered Reference</span>
+    </div>
+    <div id="medicineSubhead" class="medicineSubhead"></div>
+    <div id="medicineFilters" class="medicineFilters"></div>
+    <div id="products" class="cards"></div>
+  </section>
+
+  <section id="history" class="section">
+    <div class="sectionHead">
+      <div><span class="eyebrow">03 / HISTORY</span><h2 id="historyTitle">अलीकडील स्कॅन इतिहास</h2></div>
+      <button class="btn secondary" id="refreshHistoryBtn" type="button">🔄 <span id="refreshText">ताजे करा</span></button>
+    </div>
+    <div id="scanHistoryList" class="historyGrid"></div>
+  </section>
+
+  <section id="about" class="info">
+    <div>
+      <span class="eyebrow">04 / TRUST &amp; SOURCES</span>
+      <h2 id="trustTitle">विश्वासार्ह माहिती, स्पष्ट स्रोत</h2>
+      <p id="trustText">रोग व्यवस्थापनासाठी उपलब्ध संदर्भ आणि उत्पादन माहिती स्रोतासह दाखवली जाते. किंमत किंवा उत्पादनाचा स्रोत सत्यापित नसल्यास तो अंदाजाने दाखवला जात नाही.</p>
+    </div>
+    <div class="sources">
+      <div><b>ICAR &amp; State SAUs</b><span>Crop protection &amp; field advisories</span></div>
+      <div><b>PPQS / CIB&amp;RC</b><span>Official registration &amp; label references</span></div>
+      <div><b>Online Marketplaces</b><span>Verified search &amp; seller links</span></div>
+    </div>
+  </section>
+</main>
+
+<!-- Product Details Modal -->
+<div id="productModal" class="modalBackdrop" style="display:none;" onclick="closeProductModal(event)">
+  <div class="modalContent" onclick="event.stopPropagation()">
+    <div class="modalHeader">
+      <h3 id="modalProductName">Product Name</h3>
+      <button type="button" class="modalCloseBtn" onclick="closeProductModal()">✕</button>
+    </div>
+    <div id="modalBody" class="modalBody"></div>
+  </div>
+</div>
+
+<!-- Login / Signup Screen (Marathi-first, premium two-column design) -->
+<div id="authModal" class="modalBackdrop authBackdrop" style="display:none;" onclick="closeAuthModal(event)">
+  <div class="modalContent authScreen" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+
+    <!-- LEFT: brand visual panel -->
+    <div class="authVisual" aria-hidden="true">
+      <div class="authVisualTop">
+        <span class="authBrandMark">🌱</span>
+        <div>
+          <b>ShetiMitra</b>
+          <small id="authBrandTag">शेतीसाठी स्मार्ट साथीदार</small>
+        </div>
+      </div>
+      <svg class="authArt" viewBox="0 0 320 190" fill="none" role="img">
+        <circle cx="258" cy="42" r="26" fill="#FFE082" opacity="0.95"/>
+        <circle cx="258" cy="42" r="36" fill="#FFE082" opacity="0.25"/>
+        <path d="M0 130 Q80 92 160 124 T320 112 V190 H0 Z" fill="#2e7d4f"/>
+        <path d="M0 150 Q90 120 180 146 T320 138 V190 H0 Z" fill="#1b5e20"/>
+        <g stroke="#A5D6A7" stroke-width="3" stroke-linecap="round">
+          <path d="M52 168 l8 -26 M70 170 l8 -26 M88 170 l8 -26 M106 168 l8 -26"/>
+          <path d="M196 164 l8 -26 M214 166 l8 -26 M232 166 l8 -26 M250 164 l8 -26"/>
+        </g>
+        <g stroke="#C8E6C9" stroke-width="3" stroke-linecap="round">
+          <path d="M56 148 q-10 -2 -14 -12 M66 148 q10 -2 14 -12"/>
+          <path d="M218 142 q-10 -2 -14 -12 M228 142 q10 -2 14 -12"/>
+        </g>
+        <ellipse cx="70" cy="176" rx="26" ry="6" fill="#14401f" opacity="0.5"/>
+        <ellipse cx="228" cy="174" rx="26" ry="6" fill="#14401f" opacity="0.5"/>
+      </svg>
+      <p class="authTagline" id="authTagline">तुमच्या पिकांची काळजी, आता अधिक स्मार्ट पद्धतीने.</p>
+      <ul class="authPoints">
+        <li><span>🔍</span><span id="authPoint1">AI पिक रोग तपासणी</span></li>
+        <li><span>🌿</span><span id="authPoint2">सत्यापित औषध मार्गदर्शन</span></li>
+        <li><span>📜</span><span id="authPoint3">तुमचा वैयक्तिक स्कॅन इतिहास</span></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: auth card -->
+    <div class="authPanel">
+      <div class="modalHeader authHeader">
+        <div class="authLogo">🌱</div>
+        <div>
+          <h3 id="authModalTitle">स्वागत आहे 👋</h3>
+          <p class="authCardSub" id="authCardSub">तुमच्या ShetiMitra खात्यात लॉगिन करा</p>
+        </div>
+        <button type="button" class="modalCloseBtn authCloseBtn" onclick="closeAuthModal()" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody authBody">
+        <div id="authError" class="authError" role="alert" aria-live="assertive"></div>
+
+        <form id="loginForm" class="authForm" novalidate>
+          <div class="authField">
+            <label for="liIdentifier" id="liIdentifierLabel">मोबाइल क्रमांक किंवा ईमेल</label>
+            <input id="liIdentifier" name="identifier" type="text" autocomplete="username" required aria-required="true">
+          </div>
+
+          <div class="authField">
+            <label for="liPassword" id="liPasswordLabel">पासवर्ड</label>
+            <div class="pwWrap">
+              <input id="liPassword" name="password" type="password" autocomplete="current-password" required aria-required="true">
+              <button type="button" class="pwToggle" id="liPwToggle" onclick="togglePassword('liPassword', this)" aria-label="Show password" aria-pressed="false">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn authSubmitBtn" id="liSubmit">लॉगिन करा</button>
+
+          <button type="button" class="authSwitchBtn" onclick="switchAuthMode('signup')" id="toSignup">खाते नाही? नवीन खाते तयार करा</button>
+        </form>
+
+        <form id="signupForm" class="authForm" style="display:none;" novalidate>
+          <div class="authField">
+            <label for="suName" id="suNameLabel">पूर्ण नाव</label>
+            <input id="suName" name="name" type="text" autocomplete="name" required aria-required="true">
+          </div>
+
+          <div class="authField">
+            <label for="suMobile" id="suMobileLabel">मोबाइल क्रमांक</label>
+            <input id="suMobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" required aria-required="true">
+          </div>
+
+          <div class="authField">
+            <label for="suEmail" id="suEmailLabel">ईमेल (पर्यायी)</label>
+            <input id="suEmail" name="email" type="email" autocomplete="email" aria-required="false">
+          </div>
+
+          <div class="authField">
+            <label for="suPassword" id="suPasswordLabel">पासवर्ड</label>
+            <div class="pwWrap">
+              <input id="suPassword" name="password" type="password" autocomplete="new-password" required aria-required="true">
+              <button type="button" class="pwToggle" id="suPwToggle" onclick="togglePassword('suPassword', this)" aria-label="Show password" aria-pressed="false">👁️</button>
+            </div>
+          </div>
+
+          <div class="authField">
+            <label for="suConfirm" id="suConfirmLabel">पासवर्ड पुन्हा टाइप करा</label>
+            <div class="pwWrap">
+              <input id="suConfirm" name="confirmPassword" type="password" autocomplete="new-password" required aria-required="true">
+              <button type="button" class="pwToggle" id="suConfirmToggle" onclick="togglePassword('suConfirm', this)" aria-label="Show password" aria-pressed="false">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn authSubmitBtn" id="suSubmit">खाते तयार करा</button>
+
+          <button type="button" class="authSwitchBtn" onclick="switchAuthMode('login')" id="toLogin">आधीच खाते आहे? लॉगिन करा</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 ShetiMitra AI • स्वतंत्र शेतकरी सहाय्यक ब्रँड • AI screening &amp; decision support only</footer>
+<script src="/app.js"></script>
+</body>
+</html>

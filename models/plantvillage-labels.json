@@ -1,0 +1,26 @@
+{
+  "model": "Rishmina/plant-disease-detection-resnet50",
+  "revision": "main",
+  "license": "MIT",
+  "inputSize": 224,
+  "mean": [0.485, 0.456, 0.406],
+  "std": [0.229, 0.224, 0.225],
+  "classOrder": "ImageFolder alphabetical class-directory order from the source repository README",
+  "classes": [
+    { "key": "pepper__bell___bacterial_spot", "crop": "pepper", "name": { "mr": "ढोबळी मिरचीवरील जिवाणूजन्य ठिपके", "hi": "शिमला मिर्च का बैक्टीरियल स्पॉट", "en": "Bell pepper bacterial spot" } },
+    { "key": "pepper__bell___healthy", "crop": "pepper", "name": { "mr": "ढोबळी मिरची निरोगी", "hi": "शिमला मिर्च स्वस्थ", "en": "Bell pepper healthy" } },
+    { "key": "potato___early_blight", "crop": "potato", "name": { "mr": "बटाट्यावरील अर्ली ब्लाइट", "hi": "आलू अगेती झुलसा", "en": "Potato early blight" } },
+    { "key": "potato___late_blight", "crop": "potato", "name": { "mr": "बटाट्यावरील लेट ब्लाइट", "hi": "आलू पछेती झुलसा", "en": "Potato late blight" } },
+    { "key": "potato___healthy", "crop": "potato", "name": { "mr": "बटाटा निरोगी", "hi": "आलू स्वस्थ", "en": "Potato healthy" } },
+    { "key": "tomato_bacterial_spot", "crop": "tomato", "name": { "mr": "टोमॅटोवरील जिवाणूजन्य ठिपके", "hi": "टमाटर का बैक्टीरियल स्पॉट", "en": "Tomato bacterial spot" } },
+    { "key": "tomato_early_blight", "crop": "tomato", "name": { "mr": "टोमॅटोवरील अर्ली ब्लाइट", "hi": "टमाटर अगेती झुलसा", "en": "Tomato early blight" } },
+    { "key": "tomato_late_blight", "crop": "tomato", "name": { "mr": "टोमॅटोवरील लेट ब्लाइट", "hi": "टमाटर पछेती झुलसा", "en": "Tomato late blight" } },
+    { "key": "tomato_leaf_mold", "crop": "tomato", "name": { "mr": "टोमॅटोवरील पानावरील बुरशी", "hi": "टमाटर लीफ मोल्ड", "en": "Tomato leaf mold" } },
+    { "key": "tomato_septoria_leaf_spot", "crop": "tomato", "name": { "mr": "टोमॅटोवरील सेप्टोरिया पानांचे ठिपके", "hi": "टमाटर सेप्टोरिया पत्ती धब्बा", "en": "Tomato Septoria leaf spot" } },
+    { "key": "tomato_spider_mites_two_spotted_spider_mite", "crop": "tomato", "name": { "mr": "टोमॅटोवरील दोन ठिपक्यांचा कोळी माइट", "hi": "टमाटर पर दो-धब्बों वाला स्पाइडर माइट", "en": "Tomato two-spotted spider mite" } },
+    { "key": "tomato__target_spot", "crop": "tomato", "name": { "mr": "टोमॅटोवरील टार्गेट स्पॉट", "hi": "टमाटर टारगेट स्पॉट", "en": "Tomato target spot" } },
+    { "key": "tomato__tomato_yellowleaf__curl_virus", "crop": "tomato", "name": { "mr": "टोमॅटो यलो लीफ कर्ल विषाणू", "hi": "टमाटर येलो लीफ कर्ल वायरस", "en": "Tomato yellow leaf curl virus" } },
+    { "key": "tomato__tomato_mosaic_virus", "crop": "tomato", "name": { "mr": "टोमॅटो मोझॅक विषाणू", "hi": "टमाटर मोज़ेक वायरस", "en": "Tomato mosaic virus" } },
+    { "key": "tomato_healthy", "crop": "tomato", "name": { "mr": "टोमॅटो निरोगी", "hi": "टमाटर स्वस्थ", "en": "Tomato healthy" } }
+  ]
+}

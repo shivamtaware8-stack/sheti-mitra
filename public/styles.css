@@ -1,0 +1,914 @@
+:root{--ink:#173b2a;--muted:#65766b;--leaf:#2e7d4f;--soft:#eef7ef;--line:#dfe9df;--cream:#f7f6ee;--white:#fff;--danger:#a33b32;--warn:#8a6818}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#fbfcf8}header{height:74px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 6vw;position:sticky;top:0;z-index:5}.brand{display:flex;gap:10px;align-items:center}.logo{font-size:30px}.brand b{display:block;font-size:19px}.brand small{display:block;color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:25px}nav a{color:var(--ink);text-decoration:none;font-size:14px}select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px;color:var(--ink)}main{max-width:1180px;margin:auto;padding:34px 22px}.hero{min-height:450px;border-radius:28px;background:linear-gradient(135deg,#eff8ee,#e5f0df);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;padding:55px 65px;overflow:hidden}.pill,.eyebrow{font-size:11px;letter-spacing:.13em;font-weight:800;color:var(--leaf)}h1{font-size:53px;line-height:1.05;margin:16px 0}h1 em{font-style:normal;color:var(--leaf)}.hero p{max-width:580px;color:#53675a;font-size:17px;line-height:1.7}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;background:var(--leaf);color:#fff;text-decoration:none;border-radius:12px;padding:14px 21px;font-weight:800;cursor:pointer}.btn:disabled{opacity:.65;cursor:not-allowed}.secondary{background:#fff;color:var(--leaf);border:1px solid var(--line)}.cameraBtn{background:#f4faf4;color:var(--leaf);border:1px solid var(--line)}.heroArt{font-size:110px;text-align:center;transform:rotate(-4deg)}.heroArt span{font-size:90px;display:inline-block;margin:0 -15px}.panel,.section{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px}.sectionHead{display:flex;justify-content:space-between;align-items:start;gap:15px}.secure,.verified,.confidenceBadge{font-size:12px;padding:8px 12px;border-radius:20px;background:var(--soft);color:var(--leaf);white-space:nowrap}.scanGrid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.drop{border:2px dashed #cbdacb;border-radius:20px;padding:30px;text-align:center;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center}.scanIcon{font-size:44px}.drop h3{margin:8px 0}.drop p,.note{color:var(--muted);font-size:13px}.drop input{display:none}.uploadActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:5px}.drop img{max-width:100%;max-height:190px;margin-top:15px;border-radius:12px;display:none}.fileName{margin-top:10px;font-size:12px;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.form{display:flex;flex-direction:column;gap:12px;justify-content:center}.form label{font-weight:800;font-size:13px}.form select{padding:14px}.form .btn{margin-top:5px}.note{background:#fafbf6;padding:12px;border-radius:10px;line-height:1.5}.resultCard{margin-top:22px;border:1px solid var(--line);border-radius:18px;padding:22px;background:#f9fcf8}.resultCard p{line-height:1.6}.resultTop{display:flex;justify-content:space-between;align-items:center;gap:12px}.diseaseName{font-size:25px;margin:12px 0 4px}.diseaseKey{color:var(--muted);font-size:13px}.confidenceBar{height:8px;background:#e5eee5;border-radius:20px;overflow:hidden;margin:15px 0}.confidenceBar span{display:block;height:100%;background:var(--leaf);border-radius:20px}.result-warning{background:#fffaf0;border-color:#ead8a3}.result-warning .confidenceBar span{background:#b08a25}.result-error{background:#fff7f6;border-color:#ecc9c5}.result-healthy{background:#f5fbf6}.result-loading{display:flex;align-items:center;gap:14px}.loader{width:24px;height:24px;border:3px solid #dce9df;border-top-color:var(--leaf);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.detailBlock{margin-top:18px}.detailBlock h4{margin:0 0 8px}.detailBlock ul{margin:0;padding-left:22px;color:#4e6254}.detailBlock li{margin:5px 0;line-height:1.5}.recommendedHeading{margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}.recommendedHeading h4{margin:0 0 6px}.recommendedHeading p{font-size:12px;color:var(--muted)}.disclaimer{display:block;margin-top:18px;color:#68776c;line-height:1.55}.muted{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.cardImg{height:165px;background:#edf6ed;display:grid;place-items:center;overflow:hidden}.cardImg img{width:100%;height:100%;object-fit:cover}.productEmoji{font-size:70px}.image-failed{display:grid}.cardBody{padding:18px}.card h3{margin:5px 0 8px}.card p{font-size:13px;color:var(--muted);line-height:1.5}.productTag{font-size:11px;font-weight:800;color:var(--leaf);background:var(--soft);padding:5px 8px;border-radius:12px;display:inline-block}.price{font-size:20px;font-weight:900;margin:14px 0}.mutedPrice{font-size:14px;color:var(--warn)}.productMeta{font-size:12px;margin:8px 0;color:#526358}.usage{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}.usage p{margin:5px 0}.unavailable{font-size:12px;color:#9a6b19;background:#fff8e6;padding:7px;border-radius:8px;margin-top:10px}.source{font-size:11px;color:var(--muted);margin-top:10px}.emptyCard{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:22px;color:var(--muted);background:#fafcf8}.info{margin:34px 0;padding:38px;border-radius:24px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:30px}.info p{color:#58695d;line-height:1.7}.sources{display:grid;gap:12px}.sources div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}.sources b,.sources span{display:block}.sources span{font-size:12px;color:var(--muted);margin-top:4px}footer{text-align:center;padding:30px;color:#738176;font-size:12px}@media(max-width:800px){header{height:auto;min-height:74px;padding:12px 18px;gap:12px;align-items:flex-start}.brand b{font-size:17px}nav{gap:8px;flex-wrap:wrap;justify-content:flex-end}nav a{display:none}nav select{padding:8px}.hero{grid-template-columns:1fr;padding:35px 25px}.heroArt{font-size:70px}.hero h1{font-size:40px}.scanGrid,.info{grid-template-columns:1fr}.cards{grid-template-columns:1fr}main{padding:18px}.panel,.section{padding:20px}.sectionHead{flex-direction:column}.resultTop{align-items:flex-start;flex-direction:column}.uploadActions{width:100%;flex-direction:column}.uploadActions .btn{width:100%}}@media(max-width:430px){h1{font-size:34px}.hero{padding:28px 20px}.drop{padding:22px 15px}.confidenceBadge{white-space:normal}.brand small{font-size:10px}}
+
+/* Additional Custom Styles for ShetiMitra Crop Workflow */
+.resultBanner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+.banner-demo {
+  background: #fff8e1;
+  border: 1.5px solid #ffe082;
+  color: #5d4037;
+}
+.banner-demo strong {
+  display: block;
+  font-size: 15px;
+  color: #b78103;
+}
+.banner-demo p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6d4c41;
+}
+.banner-model {
+  background: #e8f5e9;
+  border: 1.5px solid #a5d6a7;
+  color: #1b5e20;
+}
+.banner-model strong {
+  display: block;
+  font-size: 16px;
+  color: #2e7d32;
+  letter-spacing: .05em;
+}
+.banner-model small {
+  color: #43a047;
+  font-size: 12px;
+}
+.bannerIcon {
+  font-size: 26px;
+}
+
+.resultSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 14px 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 16px;
+  border-radius: 14px;
+}
+.resultSummaryField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.resultSummaryField .fieldLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.resultSummaryField .fieldValue {
+  font-size: 17px;
+  color: var(--ink);
+  font-weight: 700;
+}
+.diseaseHighlight {
+  color: #a33b32 !important;
+}
+.healthyHighlight {
+  color: var(--leaf) !important;
+}
+
+.referenceMeta {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #f4f8f4;
+  border-radius: 10px;
+  border: 1px solid #dbeade;
+}
+.referenceMeta small {
+  color: #44614a;
+  display: block;
+  font-size: 12px;
+}
+.disclaimerBox {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: #fafbf9;
+  border-left: 4px solid var(--muted);
+  border-radius: 4px;
+}
+.disclaimerBox small {
+  display: block;
+  color: #55665b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.historyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.historyCard {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: #fafdfa;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.historyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.historyTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.historyCrop {
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--ink);
+  text-transform: capitalize;
+}
+.historyMode {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.historyMode.demo {
+  background: #fff3cd;
+  color: #856404;
+}
+.historyMode.model {
+  background: #d4edda;
+  color: #155724;
+}
+.historyDisease {
+  font-size: 15px;
+  font-weight: 700;
+  color: #173b2a;
+}
+.historyMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid #eef3ee;
+  padding-top: 6px;
+}
+
+@media(max-width: 600px) {
+  .resultSummaryGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Medicine Filters and Subhead */
+.medicineSubhead {
+  margin: 10px 0 16px;
+  font-size: 15px;
+  color: #3b5042;
+  font-weight: 600;
+}
+.medicineFilters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.filterPill {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filterPill:hover {
+  border-color: var(--leaf);
+  color: var(--leaf);
+}
+.filterPill.active {
+  background: var(--leaf);
+  color: #fff;
+  border-color: var(--leaf);
+}
+
+/* Enhanced Product Cards */
+.productCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.productCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+.cardHeaderTags {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.categoryTag {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #556b2f;
+  background: #f1f8e9;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: .05em;
+}
+.productTitle {
+  font-size: 18px;
+  margin: 4px 0 6px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.productBrand {
+  font-size: 13px;
+  color: #4b6354;
+  margin-bottom: 12px;
+}
+.productSuitability {
+  background: #fbfdfa;
+  border: 1px solid #e7eee7;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.productSpecs {
+  font-size: 12.5px;
+  color: #526358;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.priceBox {
+  background: #f7faf7;
+  border: 1.5px solid #dce8dd;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0;
+}
+.priceLabel {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+.priceValue {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 4px 0 2px;
+}
+.priceAvailable {
+  color: #1b5e20;
+}
+.priceUnavailable {
+  color: #856404;
+  font-size: 14px;
+  font-weight: 700;
+}
+.priceSubtext {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.verificationBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  background: #f5f8f5;
+  border-radius: 8px;
+}
+.verifiedBadge {
+  color: #2e7d32;
+  font-weight: 700;
+}
+.sourceLink {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 700;
+}
+.sourceLink:hover {
+  text-decoration: underline;
+}
+.whereToBuy {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: auto;
+}
+.whereToBuyLabel {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.buyButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+.buyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+.amazonBtn {
+  background: #ff9900;
+  color: #111;
+}
+.amazonBtn:hover {
+  background: #e68a00;
+}
+.flipkartBtn {
+  background: #2874f0;
+  color: #fff;
+}
+.flipkartBtn:hover {
+  background: #1b62d6;
+}
+.officialBtn {
+  background: #f0f4f0;
+  color: #2e7d4f;
+  border: 1px solid #c9dccb;
+}
+.officialBtn:hover {
+  background: #e2ede3;
+}
+.viewDetailsBtn {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Modal Backdrop & Content */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+.modalContent {
+  background: #fff;
+  border-radius: 20px;
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+.modalHeader {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+.modalHeader h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--ink);
+}
+.modalCloseBtn {
+  background: none;
+  border: 0;
+  font-size: 22px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.modalCloseBtn:hover {
+  color: var(--ink);
+}
+.modalBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modalSection {
+  background: #fafcfa;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+.modalSection h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: .05em;
+}
+.modalSection p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* ============================================================================
+   STATUS BANNERS: uncertain / warning (low confidence, crop mismatch, model
+   unavailable) — never presented as a confirmed diagnosis.
+   ============================================================================ */
+
+.banner-uncertain,
+.banner-warning {
+  background: #fff3e0;
+  border: 1.5px solid #ffb74d;
+  color: #7a4a00;
+}
+
+.banner-uncertain strong,
+.banner-warning strong {
+  display: block;
+  font-size: 15px;
+  color: #b78103;
+}
+
+.banner-uncertain p,
+.banner-warning p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #7a4a00;
+}
+
+.banner-uncertain small,
+.banner-warning small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #8d6e63;
+  font-style: italic;
+}
+
+.result-warning {
+  border-color: #ffb74d;
+  background: #fffdf8;
+}
+
+.uncertainHighlight {
+  color: #b78103 !important;
+  font-weight: 700;
+}
+
+.historyMode.uncertain {
+  background: #fff3e0;
+  color: #b78103;
+}
+
+.historyMode.other {
+  background: #fbe9e7;
+  color: #c62828;
+}
+
+/* ============================================================================
+   USER AREA & AUTH MODAL (login / signup) — matches existing ShetiMitra design
+   ============================================================================ */
+
+.userArea {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.userChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--brand, #2e7d4f);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tinyBtn {
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+}
+
+.authBackdrop {
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 20px 12px;
+  background: rgba(20, 64, 31, 0.55);
+}
+
+.authScreen {
+  display: flex;
+  width: min(880px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: hidden;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 28px 70px rgba(10, 40, 20, 0.35);
+  border: 1px solid #e3efe6;
+}
+
+/* ---- LEFT: brand visual ---- */
+
+.authVisual {
+  flex: 1 1 46%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 30px 28px;
+  color: #fff;
+  background: linear-gradient(160deg, #2e7d4f 0%, #256b41 45%, #1b5e20 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.authVisual::after {
+  content: '';
+  position: absolute;
+  inset: auto -70px -90px auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.authVisualTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authBrandMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 24px;
+}
+
+.authVisualTop b {
+  display: block;
+  font-size: 21px;
+  letter-spacing: 0.01em;
+}
+
+.authVisualTop small {
+  display: block;
+  font-size: 13px;
+  opacity: 0.92;
+}
+
+.authArt {
+  width: 100%;
+  height: auto;
+  margin: 4px 0;
+}
+
+.authTagline {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.authPoints {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.authPoints li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+/* ---- RIGHT: auth card ---- */
+
+.authPanel {
+  flex: 1 1 54%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+}
+
+.authHeader {
+  align-items: flex-start;
+  gap: 12px;
+  padding: 22px 26px 0;
+  border-bottom: none;
+}
+
+.authLogo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(150deg, #e8f5e9, #c8e6c9);
+  font-size: 26px;
+  box-shadow: inset 0 0 0 1.5px #a5d6a7;
+  flex: 0 0 auto;
+}
+
+.authHeader h3 {
+  margin: 2px 0 4px;
+  font-size: 22px;
+  line-height: 1.25;
+  color: #1b3a24;
+}
+
+.authCardSub {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted, #6b7d6f);
+}
+
+.authHeader .modalCloseBtn {
+  margin-left: auto;
+}
+
+.authBody {
+  padding: 16px 26px 24px;
+  overflow-y: auto;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.authField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.authForm label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2f4a36;
+}
+
+.authForm input {
+  padding: 12px 14px;
+  border: 1.5px solid #dfe9e1;
+  border-radius: 14px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fbfdfb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.authForm input:focus {
+  outline: none;
+  border-color: #2e7d4f;
+  box-shadow: 0 0 0 3px rgba(46, 125, 79, 0.14);
+  background: #fff;
+}
+
+.pwWrap {
+  position: relative;
+}
+
+.pwWrap input {
+  padding-right: 48px;
+}
+
+.pwToggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 10px;
+  line-height: 1;
+}
+
+.pwToggle:hover,
+.pwToggle:focus-visible {
+  background: #eef4ef;
+  outline: none;
+}
+
+.authSubmitBtn {
+  margin-top: 12px;
+  width: 100%;
+  justify-content: center;
+  padding: 13px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #35915c, #2e7d4f);
+  box-shadow: 0 8px 18px rgba(46, 125, 79, 0.28);
+  transition: transform 0.08s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.authSubmitBtn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  box-shadow: 0 10px 22px rgba(46, 125, 79, 0.34);
+}
+
+.authSubmitBtn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(46, 125, 79, 0.28);
+}
+
+.authSubmitBtn:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.authSwitchBtn {
+  margin-top: 6px;
+  background: none;
+  border: none;
+  color: #2e7d4f;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.authSwitchBtn:hover,
+.authSwitchBtn:focus-visible {
+  text-decoration: underline;
+  background: #f1f7f2;
+  outline: none;
+}
+
+.authError {
+  color: #c62828;
+  background: #fdecea;
+  border: 1px solid #f5c6c1;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 9px 12px;
+  min-height: 18px;
+}
+
+.authError:empty {
+  display: none;
+}
+
+/* ---- Mobile: single column, slim brand banner ---- */
+
+@media (max-width: 720px) {
+  .authBackdrop {
+    padding: 10px 8px;
+    align-items: flex-start;
+  }
+
+  .authScreen {
+    flex-direction: column;
+    border-radius: 20px;
+    max-height: none;
+  }
+
+  .authVisual {
+    flex: none;
+    padding: 18px 20px 14px;
+    gap: 6px;
+  }
+
+  .authVisualTop b {
+    font-size: 18px;
+  }
+
+  .authBrandMark {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+
+  .authArt {
+    display: none;
+  }
+
+  .authTagline {
+    font-size: 13.5px;
+  }
+
+  .authPoints {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .authPoints li {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .authHeader {
+    padding: 16px 18px 0;
+  }
+
+  .authBody {
+    padding: 12px 18px 20px;
+  }
+
+  .authHeader h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 760px) {
+  .userName {
+    display: none;
+  }
+  .userChip .tinyBtn span {
+    display: none;
+  }
+}
