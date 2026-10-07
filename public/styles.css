@@ -953,3 +953,19 @@
   .cropPickGrid { grid-template-columns: 1fr 1fr; }
   .dashRow { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---- Phase 2 (append-only; Phase 1 styles above untouched) ---- */
+.camBox { display: grid; gap: 10px; }
+#camVideo, #camShot { width: 100%; max-height: 320px; border-radius: 14px; background: #0c1a12; object-fit: cover; }
+.camRow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.p2SearchRow { display: flex; gap: 8px; flex-wrap: wrap; }
+.p2SearchRow input { flex: 1 1 220px; border: 1.5px solid #dfe9e1; border-radius: 12px; padding: 12px; font-size: 15px; }
+.p2Grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+.p2Card { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fbfdfb; display: grid; gap: 6px; }
+.p2Card h4 { margin: 0; }
+.p2Cat { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--leaf); text-transform: uppercase; }
+.p2Detail { margin-top: 12px; border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: #fff; display: grid; gap: 8px; }
+.p2Results { display: grid; gap: 8px; margin-top: 10px; }
+.p2Row { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #fbfdfb; }
+@media (max-width: 900px) { .p2Grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .p2Grid { grid-template-columns: 1fr; } .p2Row { flex-direction: column; align-items: flex-start; } }

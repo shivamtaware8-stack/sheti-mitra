@@ -28,7 +28,22 @@ import {
   saveProductForUser,
   removeSavedProductForUser,
   getDashboardSummary,
-  getDiseaseHistory
+  getDiseaseHistory,
+  getProductById,
+  getDiseaseDetails,
+  listCrops,
+  listDiseases,
+  listDiseasesForCrop,
+  listCropGuides,
+  getCropGuide,
+  searchCatalog,
+  getSavedDiseases,
+  saveDiseaseForUser,
+  removeSavedDiseaseForUser,
+  getSavedGuides,
+  getSavedGuideIds,
+  saveGuideForUser,
+  removeSavedGuideForUser
 } from './db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -650,6 +665,117 @@ app.get('/api/scans', (req, res) => {
     console.error('Failed to fetch scan history:', error);
     res.status(500).json({ error: 'database_error' });
   }
+});
+
+/* ============================================================================
+   PHASE 2: disease details, product details, guides, search, bookmarks.
+   Phase 1 routes above are untouched.
+   ============================================================================ */
+
+app.get('/api/catalog/crops', (req, res) => {
+  try { res.json(listCrops()); }
+  catch (error) { console.error('Crops fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/diseases', (req, res) => {
+  try {
+    const crop = String(req.query.crop || '').trim().toLowerCase();
+    res.json(crop ? listDiseasesForCrop(crop) : listDiseases());
+  } catch (error) { console.error('Diseases fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/diseases/:crop/:key', (req, res) => {
+  try {
+    const details = getDiseaseDetails(req.params.crop, req.params.key);
+    if (!details || (!details.reference && !details.diseaseRow)) return res.status(404).json({ error: 'not_found' });
+    res.json(details);
+  } catch (error) { console.error('Disease details failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/products/:id', (req, res) => {
+  try {
+    const product = getProductById(req.params.id);
+    if (!product) return res.status(404).json({ error: 'not_found' });
+    res.json(product);
+  } catch (error) { console.error('Product details failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/guides', (req, res) => {
+  try { res.json(listCropGuides()); }
+  catch (error) { console.error('Guides fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/guides/:crop', (req, res) => {
+  try {
+    const guide = getCropGuide(req.params.crop);
+    if (!guide) return res.status(404).json({ error: 'not_found' });
+    res.json(guide);
+  } catch (error) { console.error('Guide fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/search', (req, res) => {
+  try { res.json(searchCatalog(req.query.q, req.query.limit)); }
+  catch (error) { console.error('Search failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/saved/diseases', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json({ saved: getSavedDiseases(user.id) });
+  } catch (error) { console.error('Saved diseases fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.post('/api/saved/diseases', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const saved = saveDiseaseForUser(user.id, req.body?.crop, req.body?.diseaseKey || req.body?.disease_key);
+    return res.status(201).json({ saved });
+  } catch (err) {
+    if (['invalid_crop', 'invalid_disease'].includes(String(err.message))) return res.status(400).json({ error: String(err.message) });
+    console.error('Save disease failed:', err);
+    return res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.delete('/api/saved/diseases/:crop/:key', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const saved = removeSavedDiseaseForUser(user.id, req.params.crop, req.params.key);
+    return res.json({ saved });
+  } catch (error) { console.error('Remove saved disease failed:', error); return res.status(500).json({ error: 'database_error' }); }
+});
+
+app.get('/api/saved/guides', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json({ savedIds: getSavedGuideIds(user.id), saved: getSavedGuides(user.id) });
+  } catch (error) { console.error('Saved guides fetch failed:', error); res.status(500).json({ error: 'database_error' }); }
+});
+
+app.post('/api/saved/guides', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const saved = saveGuideForUser(user.id, req.body?.crop);
+    return res.status(201).json({ savedIds: getSavedGuideIds(user.id), saved });
+  } catch (err) {
+    if (String(err.message) === 'invalid_guide') return res.status(404).json({ error: 'invalid_guide' });
+    console.error('Save guide failed:', err);
+    return res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.delete('/api/saved/guides/:crop', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const saved = removeSavedGuideForUser(user.id, req.params.crop);
+    return res.json({ savedIds: getSavedGuideIds(user.id), saved });
+  } catch (error) { console.error('Remove saved guide failed:', error); return res.status(500).json({ error: 'database_error' }); }
 });
 
 /* ============================================================================

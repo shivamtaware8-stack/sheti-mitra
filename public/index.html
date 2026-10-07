@@ -73,7 +73,23 @@
       <div class="form">
         <label id="cropLabel" for="crop">पीक</label>
         <select id="crop" aria-label="Crop"></select>
+        <!-- Phase 2: camera direct scan (getUserMedia + file fallback) -->
+        <div class="camBox">
+          <button class="btn secondary" id="camOpenBtn" type="button">📷 <span id="camOpenText">Scan with Camera</span></button>
+          <div id="camWrap" style="display:none;">
+            <video id="camVideo" playsinline muted autoplay></video>
+            <canvas id="camCanvas" style="display:none;"></canvas>
+            <img id="camShot" alt="captured preview" style="display:none;">
+            <div class="camRow">
+              <button class="btn secondary" id="camCaptureBtn" type="button">📸 <span id="camCaptureText">Capture</span></button>
+              <button class="btn secondary" id="camRetakeBtn" type="button" style="display:none;">↩️ <span id="camRetakeText">Retake</span></button>
+              <button class="btn secondary" id="camCloseBtn" type="button">✕ <span id="camCloseText">Close</span></button>
+            </div>
+            <div id="camError" class="note" role="alert" style="display:none;"></div>
+          </div>
+        </div>
         <button class="btn" id="scanBtn" type="button">🔍 <span id="scanBtnText">रोग तपासा</span></button>
+        <button class="btn secondary" id="rescanBtn" type="button" style="display:none;">🔄 <span id="rescanText">Re-scan</span></button>
         <div class="note" id="scanNote">फोटो स्पष्ट, चांगल्या प्रकाशात आणि रोगाची लक्षणे दिसतील असा ठेवा.</div>
       </div>
     </div>
@@ -114,6 +130,36 @@
       <div><b>Online Marketplaces</b><span>Verified search &amp; seller links</span></div>
     </div>
   </section>
+
+  <!-- Phase 2: search -->
+  <section id="p2search" class="section">
+    <div class="sectionHead">
+      <div><span class="eyebrow">05 / SEARCH</span><h2 id="p2SearchTitle">🔍 Search crops, diseases, products, guides</h2></div>
+    </div>
+    <div class="p2SearchRow">
+      <input id="p2SearchInput" type="search" aria-label="Search">
+      <button class="btn" id="p2SearchBtn" type="button">🔍 <span id="p2SearchBtnText">Search</span></button>
+    </div>
+    <div id="p2SearchStatus" class="note" aria-live="polite"></div>
+    <div id="p2SearchResults" class="p2Results" aria-live="polite"></div>
+  </section>
+
+  <!-- Phase 2: crop guides -->
+  <section id="p2guides" class="section">
+    <div class="sectionHead">
+      <div><span class="eyebrow">06 / CROP GUIDES</span><h2 id="p2GuidesTitle">📖 Crop-wise Complete Guides</h2></div>
+    </div>
+    <div id="p2GuideList" class="p2Grid" aria-live="polite"></div>
+    <div id="p2GuideDetail" class="p2Detail" style="display:none;" aria-live="polite"></div>
+  </section>
+
+  <!-- Phase 2: saved bookmarks -->
+  <section id="p2saved" class="section">
+    <div class="sectionHead">
+      <div><span class="eyebrow">07 / SAVED</span><h2 id="p2SavedTitle">🔖 My Saved Items</h2></div>
+    </div>
+    <div id="p2SavedList" class="p2Grid" aria-live="polite"></div>
+  </section>
 </main>
 
 <!-- Product Details Modal -->
@@ -124,6 +170,17 @@
       <button type="button" class="modalCloseBtn" onclick="closeProductModal()">✕</button>
     </div>
     <div id="modalBody" class="modalBody"></div>
+  </div>
+</div>
+
+<!-- Phase 2: Disease Details Modal -->
+<div id="diseaseModal" class="modalBackdrop" style="display:none;" onclick="closeDiseaseModal(event)">
+  <div class="modalContent" onclick="event.stopPropagation()">
+    <div class="modalHeader">
+      <h3 id="diseaseModalTitle">Disease Details</h3>
+      <button type="button" class="modalCloseBtn" onclick="closeDiseaseModal()">✕</button>
+    </div>
+    <div id="diseaseModalBody" class="modalBody"></div>
   </div>
 </div>
 
@@ -239,5 +296,9 @@
 
 <footer>© 2026 ShetiMitra AI • स्वतंत्र शेतकरी सहाय्यक ब्रँड • AI screening &amp; decision support only</footer>
 <script src="/app.js"></script>
+<script src="/phase2-a.js"></script>
+<script src="/phase2-b.js"></script>
+<script src="/phase2-c.js"></script>
+<script src="/phase2-d.js"></script>
 </body>
 </html>

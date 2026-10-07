@@ -3,6 +3,12 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
+import { CROP_GUIDES } from './crop-guides.js';
+import { CROP_GUIDES_2 } from './crop-guides-2.js';
+import { CROP_GUIDES_3 } from './crop-guides-3.js';
+import { CROP_GUIDES_4 } from './crop-guides-4.js';
+import { CROP_GUIDES_5 } from './crop-guides-5.js';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const dataDir = path.join(__dirname, 'data');
@@ -158,6 +164,58 @@ CREATE TABLE IF NOT EXISTS saved_products (
   product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(user_id, product_id)
+);
+
+/* Phase 2: crop guides (trilingual, general guidance only — no pesticide dosage).
+   One row per supported crop. */
+CREATE TABLE IF NOT EXISTS crop_guides (
+  crop TEXT PRIMARY KEY REFERENCES crops(id) ON DELETE CASCADE,
+  title_en TEXT NOT NULL,
+  title_hi TEXT NOT NULL,
+  title_mr TEXT NOT NULL,
+  overview_en TEXT,
+  overview_hi TEXT,
+  overview_mr TEXT,
+  conditions_en TEXT,
+  conditions_hi TEXT,
+  conditions_mr TEXT,
+  sowing_en TEXT,
+  sowing_hi TEXT,
+  sowing_mr TEXT,
+  stages_en TEXT,
+  stages_hi TEXT,
+  stages_mr TEXT,
+  irrigation_en TEXT,
+  irrigation_hi TEXT,
+  irrigation_mr TEXT,
+  diseases_en TEXT,
+  diseases_hi TEXT,
+  diseases_mr TEXT,
+  prevention_en TEXT,
+  prevention_hi TEXT,
+  prevention_mr TEXT,
+  harvest_en TEXT,
+  harvest_hi TEXT,
+  harvest_mr TEXT,
+  source TEXT NOT NULL,
+  source_url TEXT NOT NULL
+);
+
+/* Phase 2: user bookmarks for disease info + crop guides.
+   User-scoped, CASCADE, unique to prevent duplicates. */
+CREATE TABLE IF NOT EXISTS saved_diseases (
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  crop TEXT NOT NULL,
+  disease_key TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(user_id, crop, disease_key)
+);
+
+CREATE TABLE IF NOT EXISTS saved_guides (
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  crop TEXT NOT NULL REFERENCES crops(id) ON DELETE CASCADE,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(user_id, crop)
 );
 `);
 
@@ -1353,6 +1411,43 @@ for (const link of diseaseProductLinksData) {
   insertLinkStmt.run(link);
 }
 
+const insertGuideStmt = db.prepare(`
+  INSERT INTO crop_guides (crop, title_en, title_hi, title_mr,
+    overview_en, overview_hi, overview_mr,
+    conditions_en, conditions_hi, conditions_mr,
+    sowing_en, sowing_hi, sowing_mr,
+    stages_en, stages_hi, stages_mr,
+    irrigation_en, irrigation_hi, irrigation_mr,
+    diseases_en, diseases_hi, diseases_mr,
+    prevention_en, prevention_hi, prevention_mr,
+    harvest_en, harvest_hi, harvest_mr,
+    source, source_url)
+  VALUES (@crop, @title_en, @title_hi, @title_mr,
+    @overview_en, @overview_hi, @overview_mr,
+    @conditions_en, @conditions_hi, @conditions_mr,
+    @sowing_en, @sowing_hi, @sowing_mr,
+    @stages_en, @stages_hi, @stages_mr,
+    @irrigation_en, @irrigation_hi, @irrigation_mr,
+    @diseases_en, @diseases_hi, @diseases_mr,
+    @prevention_en, @prevention_hi, @prevention_mr,
+    @harvest_en, @harvest_hi, @harvest_mr,
+    @source, @source_url)
+  ON CONFLICT(crop) DO UPDATE SET
+    title_en=excluded.title_en, title_hi=excluded.title_hi, title_mr=excluded.title_mr,
+    overview_en=excluded.overview_en, overview_hi=excluded.overview_hi, overview_mr=excluded.overview_mr,
+    conditions_en=excluded.conditions_en, conditions_hi=excluded.conditions_hi, conditions_mr=excluded.conditions_mr,
+    sowing_en=excluded.sowing_en, sowing_hi=excluded.sowing_hi, sowing_mr=excluded.sowing_mr,
+    stages_en=excluded.stages_en, stages_hi=excluded.stages_hi, stages_mr=excluded.stages_mr,
+    irrigation_en=excluded.irrigation_en, irrigation_hi=excluded.irrigation_hi, irrigation_mr=excluded.irrigation_mr,
+    diseases_en=excluded.diseases_en, diseases_hi=excluded.diseases_hi, diseases_mr=excluded.diseases_mr,
+    prevention_en=excluded.prevention_en, prevention_hi=excluded.prevention_hi, prevention_mr=excluded.prevention_mr,
+    harvest_en=excluded.harvest_en, harvest_hi=excluded.harvest_hi, harvest_mr=excluded.harvest_mr
+`);
+
+for (const g of [...CROP_GUIDES, ...CROP_GUIDES_2, ...CROP_GUIDES_3, ...CROP_GUIDES_4, ...CROP_GUIDES_5]) {
+  try { insertGuideStmt.run(g); } catch (e) { console.error('guide seed failed', g.crop, e.message); }
+}
+
 /* ============================================================================
    QUERY HELPERS & API FORMATTERS
    ============================================================================ */
@@ -1780,6 +1875,128 @@ export function getDiseaseHistory(userId, limit = 50) {
     FROM scans WHERE user_id = ?
     ORDER BY id DESC LIMIT ?
   `).all(id, n);
+}
+
+export function getProductById(productId) {
+  const pid = Number(productId);
+  if (!Number.isInteger(pid) || pid <= 0) return null;
+  const row = db.prepare('SELECT * FROM products WHERE id = ?').get(pid);
+  return row ? formatProduct(row) : null;
+}
+
+export function listCrops() {
+  return db.prepare('SELECT * FROM crops ORDER BY id ASC').all();
+}
+
+export function listDiseases() {
+  return db.prepare('SELECT * FROM diseases ORDER BY crop_id ASC, name_en ASC').all();
+}
+
+export function listDiseasesForCrop(crop) {
+  const c = String(crop || '').trim().toLowerCase();
+  if (!c) return [];
+  return db.prepare('SELECT * FROM diseases WHERE crop_id = ? ORDER BY name_en ASC').all(c);
+}
+
+export function getDiseaseDetails(crop, diseaseKey) {
+  const c = String(crop || '').trim().toLowerCase();
+  if (!c) return null;
+  const reference = getDiseaseReference(c, diseaseKey);
+  const products = getProductsForDisease(c, diseaseKey);
+  const rawKey = String(diseaseKey || '').trim().toLowerCase();
+  const diseaseRow = rawKey
+    ? db.prepare('SELECT * FROM diseases WHERE (LOWER(id) = ? OR LOWER(name_en) = ?) AND LOWER(crop_id) = ?').get(rawKey, rawKey, c) || null
+    : null;
+  const cropRow = db.prepare('SELECT * FROM crops WHERE id = ?').get(c) || null;
+  return { crop: c, cropRow, diseaseKey: rawKey, diseaseRow, reference, products };
+}
+
+export function listCropGuides() {
+  return db.prepare(`
+    SELECT g.*, c.name_en AS crop_name_en, c.name_hi AS crop_name_hi, c.name_mr AS crop_name_mr
+    FROM crop_guides g LEFT JOIN crops c ON c.id = g.crop ORDER BY g.crop ASC
+  `).all();
+}
+
+export function getCropGuide(crop) {
+  const c = String(crop || '').trim().toLowerCase();
+  if (!c) return null;
+  return db.prepare(`
+    SELECT g.*, c.name_en AS crop_name_en, c.name_hi AS crop_name_hi, c.name_mr AS crop_name_mr
+    FROM crop_guides g LEFT JOIN crops c ON c.id = g.crop WHERE g.crop = ?
+  `).get(c) || null;
+}
+
+export function searchCatalog(query, limit = 20) {
+  const q = String(query || '').trim();
+  if (q.length < 2) return { crops: [], diseases: [], products: [], guides: [] };
+  const like = `%${q}%`;
+  const n = Math.min(Math.max(Number(limit) || 20, 1), 50);
+  const crops = db.prepare(`SELECT * FROM crops WHERE id LIKE ? OR name_en LIKE ? OR name_hi LIKE ? OR name_mr LIKE ? LIMIT ?`).all(like, like, like, like, n);
+  const diseases = db.prepare(`SELECT * FROM diseases WHERE id LIKE ? OR name_en LIKE ? OR name_hi LIKE ? OR name_mr LIKE ? OR scientific_name LIKE ? LIMIT ?`).all(like, like, like, like, like, n);
+  const rows = db.prepare(`SELECT * FROM products WHERE name_en LIKE ? OR name_hi LIKE ? OR name_mr LIKE ? OR brand LIKE ? OR active_ingredient LIKE ? OR target_disease LIKE ? OR crop LIKE ? LIMIT ?`).all(like, like, like, like, like, like, like, n);
+  const guides = db.prepare(`SELECT g.*, c.name_en AS crop_name_en, c.name_hi AS crop_name_hi, c.name_mr AS crop_name_mr FROM crop_guides g LEFT JOIN crops c ON c.id = g.crop WHERE g.crop LIKE ? OR g.title_en LIKE ? OR g.title_hi LIKE ? OR g.title_mr LIKE ? OR g.overview_en LIKE ? OR g.overview_hi LIKE ? OR g.overview_mr LIKE ? LIMIT ?`).all(like, like, like, like, like, like, like, n);
+  return { crops, diseases, products: rows.map(formatProduct), guides };
+}
+
+export function getSavedDiseases(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  return db.prepare('SELECT crop, disease_key, created_at AS saved_at FROM saved_diseases WHERE user_id = ? ORDER BY created_at DESC').all(id);
+}
+
+export function saveDiseaseForUser(userId, crop, diseaseKey) {
+  const id = Number(userId);
+  const c = String(crop || '').trim().toLowerCase();
+  const k = String(diseaseKey || '').trim().toLowerCase();
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  if (!c) throw new Error('invalid_crop');
+  if (!k) throw new Error('invalid_disease');
+  db.prepare('INSERT OR IGNORE INTO saved_diseases (user_id, crop, disease_key) VALUES (?, ?, ?)').run(id, c, k);
+  return getSavedDiseases(id);
+}
+
+export function removeSavedDiseaseForUser(userId, crop, diseaseKey) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const c = String(crop || '').trim().toLowerCase();
+  const k = String(diseaseKey || '').trim().toLowerCase();
+  db.prepare('DELETE FROM saved_diseases WHERE user_id = ? AND crop = ? AND disease_key = ?').run(id, c, k);
+  return getSavedDiseases(id);
+}
+
+export function getSavedGuides(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  return db.prepare(`
+    SELECT g.*, c.name_en AS crop_name_en, c.name_hi AS crop_name_hi, c.name_mr AS crop_name_mr, sg.created_at AS saved_at
+    FROM saved_guides sg JOIN crop_guides g ON g.crop = sg.crop
+    LEFT JOIN crops c ON c.id = g.crop WHERE sg.user_id = ? ORDER BY sg.created_at DESC
+  `).all(id);
+}
+
+export function getSavedGuideIds(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  return db.prepare('SELECT crop FROM saved_guides WHERE user_id = ?').all(id).map((r) => r.crop);
+}
+
+export function saveGuideForUser(userId, crop) {
+  const id = Number(userId);
+  const c = String(crop || '').trim().toLowerCase();
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const exists = db.prepare('SELECT crop FROM crop_guides WHERE crop = ?').get(c);
+  if (!exists) throw new Error('invalid_guide');
+  db.prepare('INSERT OR IGNORE INTO saved_guides (user_id, crop) VALUES (?, ?)').run(id, c);
+  return getSavedGuides(id);
+}
+
+export function removeSavedGuideForUser(userId, crop) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const c = String(crop || '').trim().toLowerCase();
+  db.prepare('DELETE FROM saved_guides WHERE user_id = ? AND crop = ?').run(id, c);
+  return getSavedGuides(id);
 }
 
 export { db };
