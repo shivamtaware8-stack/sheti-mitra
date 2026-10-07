@@ -144,6 +144,21 @@ CREATE TABLE IF NOT EXISTS sessions (
   created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   expires_at TEXT NOT NULL
 );
+
+-- PHASE 1 DASHBOARD TABLES (safe additive migrations, existing data untouched)
+CREATE TABLE IF NOT EXISTS user_crops (
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  crop TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(user_id, crop)
+);
+
+CREATE TABLE IF NOT EXISTS saved_products (
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(user_id, product_id)
+);
 `);
 
 function ensureColumn(table, column, definition) {
@@ -1637,6 +1652,134 @@ export function getSessionUser(tokenHash) {
 
 export function deleteSession(tokenHash) {
   return db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(tokenHash).changes;
+}
+
+/* ============================================================================
+   PHASE 1 DASHBOARD: PROFILE / MY CROPS / SAVED PRODUCTS
+   All helpers are strictly per-user (userId required). No cross-user access.
+   ============================================================================ */
+
+export function updateUserProfile(userId, { name, email }) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const cleanName = String(name || '').trim();
+  if (!cleanName) throw new Error('name_required');
+  let cleanEmail = String(email || '').trim().toLowerCase();
+  if (cleanEmail === '') cleanEmail = null;
+  if (cleanEmail !== null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) throw new Error('invalid_email');
+  try {
+    db.prepare('UPDATE users SET name = ?, email = ? WHERE id = ?').run(cleanName, cleanEmail, id);
+  } catch (err) {
+    if (String(err.message || '').includes('UNIQUE')) throw new Error('duplicate_email');
+    throw err;
+  }
+  return getUserById(id);
+}
+
+export function getUserCrops(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  return db.prepare('SELECT crop, created_at FROM user_crops WHERE user_id = ? ORDER BY created_at ASC').all(id);
+}
+
+export function addUserCrop(userId, crop) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const clean = String(crop || '').trim().toLowerCase();
+  if (!clean) throw new Error('invalid_crop');
+  db.prepare('INSERT OR IGNORE INTO user_crops (user_id, crop) VALUES (?, ?)').run(id, clean);
+  return getUserCrops(id);
+}
+
+export function removeUserCrop(userId, crop) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  const clean = String(crop || '').trim().toLowerCase();
+  db.prepare('DELETE FROM user_crops WHERE user_id = ? AND crop = ?').run(id, clean);
+  return getUserCrops(id);
+}
+
+export function getSavedProducts(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  const rows = db.prepare(`
+    SELECT p.*, sp.created_at AS saved_at
+    FROM saved_products sp
+    JOIN products p ON p.id = sp.product_id
+    WHERE sp.user_id = ?
+    ORDER BY sp.created_at DESC
+  `).all(id);
+  return rows.map(formatProduct);
+}
+
+export function getSavedProductIds(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  return db.prepare('SELECT product_id FROM saved_products WHERE user_id = ?').all(id).map((r) => r.product_id);
+}
+
+export function saveProductForUser(userId, productId) {
+  const id = Number(userId);
+  const pid = Number(productId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  if (!Number.isInteger(pid) || pid <= 0) throw new Error('invalid_product');
+  const exists = db.prepare('SELECT id FROM products WHERE id = ?').get(pid);
+  if (!exists) throw new Error('invalid_product');
+  db.prepare('INSERT OR IGNORE INTO saved_products (user_id, product_id) VALUES (?, ?)').run(id, pid);
+  return getSavedProducts(id);
+}
+
+export function removeSavedProductForUser(userId, productId) {
+  const id = Number(userId);
+  const pid = Number(productId);
+  if (!Number.isInteger(id) || id <= 0) throw new Error('invalid_user');
+  if (!Number.isInteger(pid) || pid <= 0) throw new Error('invalid_product');
+  db.prepare('DELETE FROM saved_products WHERE user_id = ? AND product_id = ?').run(id, pid);
+  return getSavedProducts(id);
+}
+
+export function getDashboardSummary(userId) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) {
+    return { totalScans: 0, cropsScanned: 0, recentDiagnoses: 0, healthy: 0, uncertain: 0, diagnosed: 0, lastCrop: null, lastScanAt: null };
+  }
+  const scans = db.prepare('SELECT crop, predicted_disease, confidence, status, created_at FROM scans WHERE user_id = ? ORDER BY id DESC').all(id);
+  const totalScans = scans.length;
+  const cropsScanned = new Set(scans.map((s) => String(s.crop || '').toLowerCase()).filter(Boolean)).size;
+  let healthy = 0;
+  let uncertain = 0;
+  let diagnosed = 0;
+  let recentDiagnoses = 0;
+  for (const s of scans) {
+    const status = String(s.status || '').toLowerCase();
+    const label = String(s.predicted_disease || '').toLowerCase();
+    if (status === 'uncertain') uncertain += 1;
+    else if (status === 'diagnosed' || status === 'demo') diagnosed += 1;
+    if (/(^|_)healthy($|_)/.test(label)) healthy += 1;
+    if (label && !/(^|_)healthy($|_)/.test(label) && (status === 'diagnosed' || status === 'demo')) recentDiagnoses += 1;
+  }
+  const last = scans[0] || null;
+  return {
+    totalScans,
+    cropsScanned,
+    recentDiagnoses,
+    healthy,
+    uncertain,
+    diagnosed,
+    lastCrop: last?.crop || null,
+    lastScanAt: last?.created_at || null
+  };
+}
+
+export function getDiseaseHistory(userId, limit = 50) {
+  const id = Number(userId);
+  if (!Number.isInteger(id) || id <= 0) return [];
+  const n = Math.min(Math.max(Number(limit) || 20, 1), 100);
+  return db.prepare(`
+    SELECT id, crop, predicted_disease, confidence, status, created_at
+    FROM scans WHERE user_id = ?
+    ORDER BY id DESC LIMIT ?
+  `).all(id, n);
 }
 
 export { db };

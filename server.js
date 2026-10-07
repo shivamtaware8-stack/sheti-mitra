@@ -18,7 +18,17 @@ import {
   insertUser,
   getSessionUser,
   createSession,
-  deleteSession
+  deleteSession,
+  updateUserProfile,
+  getUserCrops,
+  addUserCrop,
+  removeUserCrop,
+  getSavedProducts,
+  getSavedProductIds,
+  saveProductForUser,
+  removeSavedProductForUser,
+  getDashboardSummary,
+  getDiseaseHistory
 } from './db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -305,6 +315,138 @@ app.post('/api/auth/logout', (req, res) => {
 app.get('/api/auth/me', (req, res) => {
   const user = getCurrentUser(req);
   res.json({ user: publicUser(user) });
+});
+
+app.patch('/api/auth/profile', (req, res) => {
+  try {
+    const user = getCurrentUser(req);
+    if (!user) return res.status(401).json({ error: 'unauthorized' });
+    const updated = updateUserProfile(user.id, { name: req.body?.name, email: req.body?.email });
+    return res.json({ user: publicUser(updated) });
+  } catch (error) {
+    const code = String(error.message || '');
+    if (code === 'name_required') return res.status(400).json({ error: 'name_required' });
+    if (code === 'invalid_email') return res.status(400).json({ error: 'invalid_email' });
+    if (code === 'duplicate_email') return res.status(409).json({ error: 'duplicate_email' });
+    console.error('Profile update failed:', error);
+    return res.status(500).json({ error: 'internal_server_error' });
+  }
+});
+
+/* ============================================================================
+   API: PHASE 1 FARMER DASHBOARD (all routes require login, strictly per-user)
+   ============================================================================ */
+
+function requireUser(req, res) {
+  const user = getCurrentUser(req);
+  if (!user) {
+    res.status(401).json({ error: 'unauthorized' });
+    return null;
+  }
+  return user;
+}
+
+app.get('/api/dashboard/summary', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json({ user: publicUser(user), summary: getDashboardSummary(user.id) });
+  } catch (error) {
+    console.error('Dashboard summary failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.get('/api/dashboard/disease-history', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json(getDiseaseHistory(user.id, 50));
+  } catch (error) {
+    console.error('Disease history failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.get('/api/crops/mine', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json({ supported: supportedCrops, mine: getUserCrops(user.id) });
+  } catch (error) {
+    console.error('My crops fetch failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.post('/api/crops/mine', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const crop = String(req.body?.crop || '').trim().toLowerCase();
+    if (!supportedCrops.includes(crop)) return res.status(400).json({ error: 'unsupported_crop' });
+    res.status(201).json({ supported: supportedCrops, mine: addUserCrop(user.id, crop) });
+  } catch (error) {
+    console.error('Add crop failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.delete('/api/crops/mine/:crop', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const crop = String(req.params.crop || '').trim().toLowerCase();
+    if (!supportedCrops.includes(crop)) return res.status(400).json({ error: 'unsupported_crop' });
+    res.json({ supported: supportedCrops, mine: removeUserCrop(user.id, crop) });
+  } catch (error) {
+    console.error('Remove crop failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.get('/api/products/saved', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    res.json({ savedIds: getSavedProductIds(user.id), saved: getSavedProducts(user.id) });
+  } catch (error) {
+    console.error('Saved products fetch failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.post('/api/products/saved', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const productId = Number(req.body?.productId);
+    if (!Number.isInteger(productId) || productId <= 0) return res.status(400).json({ error: 'invalid_product' });
+    try {
+      const saved = saveProductForUser(user.id, productId);
+      return res.status(201).json({ savedIds: getSavedProductIds(user.id), saved });
+    } catch (err) {
+      if (String(err.message) === 'invalid_product') return res.status(404).json({ error: 'invalid_product' });
+      throw err;
+    }
+  } catch (error) {
+    console.error('Save product failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
+});
+
+app.delete('/api/products/saved/:id', (req, res) => {
+  try {
+    const user = requireUser(req, res);
+    if (!user) return;
+    const productId = Number(req.params.id);
+    if (!Number.isInteger(productId) || productId <= 0) return res.status(400).json({ error: 'invalid_product' });
+    const saved = removeSavedProductForUser(user.id, productId);
+    return res.json({ savedIds: getSavedProductIds(user.id), saved });
+  } catch (error) {
+    console.error('Remove saved product failed:', error);
+    res.status(500).json({ error: 'database_error' });
+  }
 });
 
 /* ============================================================================

@@ -130,7 +130,55 @@ const I = {
     verifiedPrice: 'सत्यापित किंमत',
     priceLastChecked: 'शेवटची तपासणी',
     priceSeller: 'विक्रेता',
-    buyFromSeller: 'विक्रेत्याकडून खरेदी करा'
+    buyFromSeller: 'विक्रेत्याकडून खरेदी करा',
+    dashNav: 'डॅशबोर्ड',
+    dashTitle: 'शेतकरी डॅशबोर्ड',
+    dashSub: 'नमस्कार! तुमच्या पिकांची माहिती एका ठिकाणी पहा.',
+    dashScanBtn: '🌾 पीक स्कॅन करा',
+    dashLoginNeeded: 'डॅशबोर्ड पाहण्यासाठी कृपया लॉगिन करा.',
+    dashLoading: 'माहिती लोड होत आहे…',
+    dashLoadError: 'माहिती लोड करता आली नाही. कृपया पुन्हा प्रयत्न करा.',
+    dashRetry: 'पुन्हा प्रयत्न करा',
+    statTotalScans: 'एकूण स्कॅन',
+    statCropsScanned: 'तपासलेली पिके',
+    statDiagnosed: 'निदान झालेले',
+    statHealthy: 'निरोगी',
+    statUncertain: 'अनिश्चित',
+    statLastCrop: 'शेवटचे पीक',
+    myCropsTitle: '🌾 माझी पिके',
+    myCropsSub: 'तुमची पिके निवडा — फक्त तुम्हालाच दिसतील.',
+    myCropsEmpty: 'अजून कोणतेही पीक निवडलेले नाही.',
+    myCropsEmptyHint: 'खालील यादीतून तुमचे पीक जोडा.',
+    addCrop: 'जोडा',
+    removeCrop: 'काढा',
+    addedCrops: 'निवडलेली पिके',
+    recentScansTitle: '📷 अलीकडील स्कॅन',
+    recentScansEmpty: 'अजून कोणताही स्कॅन नाही.',
+    recentScansHint: 'पहिला स्कॅन करण्यासाठी वरील बटण वापरा.',
+    viewResult: 'निकाल पहा',
+    diseaseHistoryTitle: '🦠 रोग इतिहास',
+    diseaseHistorySub: 'आधी आढळलेले रोग आणि संबंधित पीक.',
+    diseaseHistoryEmpty: 'अजून रोग इतिहास नाही.',
+    savedProductsTitle: '💊 जतन केलेली उत्पादने',
+    savedProductsSub: 'सत्यापित उत्पादनेच जतन करता येतात.',
+    savedProductsEmpty: 'अजून कोणतेही उत्पादन जतन केलेले नाही.',
+    savedProductsHint: 'औषधे विभागातून उत्पादन जतन करा.',
+    saveProduct: 'जतन करा',
+    unsaveProduct: 'काढून टाका',
+    savedBadge: '✓ जतन केले',
+    profileTitle: '👤 प्रोफाईल',
+    profileName: 'नाव',
+    profileMobile: 'मोबाईल',
+    profileEmail: 'ईमेल',
+    profileEmailEmpty: 'ईमेल दिलेला नाही',
+    profileEdit: 'माहिती बदला',
+    profileSave: 'जतन करा',
+    profileCancel: 'रद्द करा',
+    profileUpdated: 'प्रोफाईल अद्ययावत झाले.',
+    profileUpdateError: 'प्रोफाईल जतन करता आले नाही.',
+    confidenceLabel: 'विश्वास',
+    dateLabel: 'दिनांक',
+    statusLabel: 'स्थिती'
   },
 
   hi: {
@@ -258,7 +306,55 @@ const I = {
     verifiedPrice: 'सत्यापित कीमत',
     priceLastChecked: 'अंतिम जांच',
     priceSeller: 'विक्रेता',
-    buyFromSeller: 'विक्रेता से खरीदें'
+    buyFromSeller: 'विक्रेता से खरीदें',
+    dashNav: 'डैशबोर्ड',
+    dashTitle: 'किसान डैशबोर्ड',
+    dashSub: 'नमस्ते! आपकी फसल की जानकारी एक जगह देखें।',
+    dashScanBtn: '🌾 फसल स्कैन करें',
+    dashLoginNeeded: 'डैशबोर्ड देखने के लिए कृपया लॉग इन करें।',
+    dashLoading: 'जानकारी लोड हो रही है…',
+    dashLoadError: 'जानकारी लोड नहीं हो सकी। कृपया फिर से कोशिश करें।',
+    dashRetry: 'फिर से कोशिश करें',
+    statTotalScans: 'कुल स्कैन',
+    statCropsScanned: 'जांची गई फसलें',
+    statDiagnosed: 'निदान हुए',
+    statHealthy: 'स्वस्थ',
+    statUncertain: 'अनिश्चित',
+    statLastCrop: 'अंतिम फसल',
+    myCropsTitle: '🌾 मेरी फसलें',
+    myCropsSub: 'अपनी फसलें चुनें — केवल आपको दिखेंगी।',
+    myCropsEmpty: 'अभी कोई फसल नहीं चुनी है।',
+    myCropsEmptyHint: 'नीचे दी सूची से अपनी फसल जोड़ें।',
+    addCrop: 'जोड़ें',
+    removeCrop: 'हटाएं',
+    addedCrops: 'चुनी हुई फसलें',
+    recentScansTitle: '📷 हाल के स्कैन',
+    recentScansEmpty: 'अभी कोई स्कैन नहीं है।',
+    recentScansHint: 'पहला स्कैन करने के लिए ऊपर का बटन दबाएं।',
+    viewResult: 'परिणाम देखें',
+    diseaseHistoryTitle: '🦠 रोग इतिहास',
+    diseaseHistorySub: 'पहले पाए गए रोग और संबंधित फसल।',
+    diseaseHistoryEmpty: 'अभी कोई रोग इतिहास नहीं है।',
+    savedProductsTitle: '💊 सहेजे गए उत्पाद',
+    savedProductsSub: 'केवल सत्यापित उत्पाद ही सहेजे जा सकते हैं।',
+    savedProductsEmpty: 'अभी कोई उत्पाद नहीं सहेजा है।',
+    savedProductsHint: 'दवा विभाग से उत्पाद सहेजें।',
+    saveProduct: 'सहेजें',
+    unsaveProduct: 'हटाएं',
+    savedBadge: '✓ सहेजा गया',
+    profileTitle: '👤 प्रोफ़ाइल',
+    profileName: 'नाम',
+    profileMobile: 'मोबाइल',
+    profileEmail: 'ईमेल',
+    profileEmailEmpty: 'ईमेल नहीं दिया गया',
+    profileEdit: 'जानकारी बदलें',
+    profileSave: 'सहेजें',
+    profileCancel: 'रद्द करें',
+    profileUpdated: 'प्रोफ़ाइल अपडेट हो गई।',
+    profileUpdateError: 'प्रोफ़ाइल सहेजी नहीं जा सकी।',
+    confidenceLabel: 'विश्वास',
+    dateLabel: 'तारीख',
+    statusLabel: 'स्थिति'
   },
 
   en: {
@@ -386,7 +482,55 @@ const I = {
     verifiedPrice: 'Verified price',
     priceLastChecked: 'Last checked',
     priceSeller: 'Seller',
-    buyFromSeller: 'Buy from seller'
+    buyFromSeller: 'Buy from seller',
+    dashNav: 'Dashboard',
+    dashTitle: 'Farmer Dashboard',
+    dashSub: 'Hello! See all your crop information in one place.',
+    dashScanBtn: '🌾 Scan Crop',
+    dashLoginNeeded: 'Please log in to view the dashboard.',
+    dashLoading: 'Loading information…',
+    dashLoadError: 'Could not load information. Please try again.',
+    dashRetry: 'Try again',
+    statTotalScans: 'Total scans',
+    statCropsScanned: 'Crops scanned',
+    statDiagnosed: 'Diagnosed',
+    statHealthy: 'Healthy',
+    statUncertain: 'Uncertain',
+    statLastCrop: 'Last crop',
+    myCropsTitle: '🌾 My Crops',
+    myCropsSub: 'Choose your crops — visible only to you.',
+    myCropsEmpty: 'No crops selected yet.',
+    myCropsEmptyHint: 'Add your crop from the list below.',
+    addCrop: 'Add',
+    removeCrop: 'Remove',
+    addedCrops: 'Selected crops',
+    recentScansTitle: '📷 Recent Scans',
+    recentScansEmpty: 'No scans yet.',
+    recentScansHint: 'Use the button above for your first scan.',
+    viewResult: 'View Result',
+    diseaseHistoryTitle: '🦠 Disease History',
+    diseaseHistorySub: 'Previously detected diseases and their crops.',
+    diseaseHistoryEmpty: 'No disease history yet.',
+    savedProductsTitle: '💊 Saved Products',
+    savedProductsSub: 'Only verified products can be saved.',
+    savedProductsEmpty: 'No saved products yet.',
+    savedProductsHint: 'Save a product from the medicines section.',
+    saveProduct: 'Save',
+    unsaveProduct: 'Remove',
+    savedBadge: '✓ Saved',
+    profileTitle: '👤 Profile',
+    profileName: 'Name',
+    profileMobile: 'Mobile',
+    profileEmail: 'Email',
+    profileEmailEmpty: 'No email provided',
+    profileEdit: 'Edit details',
+    profileSave: 'Save',
+    profileCancel: 'Cancel',
+    profileUpdated: 'Profile updated.',
+    profileUpdateError: 'Could not save profile.',
+    confidenceLabel: 'Confidence',
+    dateLabel: 'Date',
+    statusLabel: 'Status'
   }
 };
 
@@ -412,6 +556,18 @@ let currentScanDisease = null;
 let isRecommendedMode = false;
 let currentUser = null;
 let authMode = 'login';
+
+/* Phase 1 dashboard state (never shared across users; reloaded on login/logout/lang) */
+let dashSummary = null;
+let dashRecentScans = [];
+let dashDiseaseHistory = [];
+let dashMyCrops = [];
+let dashSupportedCrops = [];
+let dashSaved = [];
+let dashSavedIds = [];
+let dashLoading = false;
+let dashError = '';
+let dashEditingProfile = false;
 
 const $ = (id) => document.getElementById(id);
 
@@ -458,11 +614,14 @@ function renderLang() {
   }
 
   if ($('navScan')) $('navScan').textContent = text('scanNav');
+  if ($('navDash')) $('navDash').textContent = text('dashNav');
   if ($('navMed')) $('navMed').textContent = text('medNav');
   if ($('navHistory')) $('navHistory').textContent = text('historyNav');
   if ($('navAbout')) $('navAbout').textContent = text('aboutNav');
   if ($('refreshText')) $('refreshText').textContent = text('refreshText');
   if ($('scanBtnText')) $('scanBtnText').textContent = text('scanBtnText');
+  if ($('dashScanBtn')) $('dashScanBtn').textContent = text('dashScanBtn');
+  if ($('dashSub')) $('dashSub').textContent = text('dashSub');
 
   // Auth modal & user area labels
   if ($('authModalTitle')) $('authModalTitle').textContent = authMode === 'signup' ? text('signupTitle') : text('loginTitle');
@@ -500,6 +659,8 @@ function renderLang() {
   // Re-render filters and products
   renderFilters();
   renderFilteredCards();
+
+  renderDashboard();
 }
 
 function updateMedicineHeadings() {
@@ -840,11 +1001,39 @@ function renderSingleProductCard(p) {
           >
             ℹ️ ${escapeHtml(text('viewDetails'))}
           </button>
+          <button
+            type="button"
+            class="btn secondary viewDetailsBtn saveProductBtn"
+            data-save-product="${escapeHtml(p.id)}"
+          >
+            ${dashSavedIds.includes(Number(p.id)) ? `✓ ${escapeHtml(text('savedBadge'))}` : `💊 ${escapeHtml(text('saveProduct'))}`}
+          </button>
         </div>
       </div>
     </article>
   `;
 }
+
+document.addEventListener('click', (event) => {
+  const btn = event.target?.closest?.('[data-save-product]');
+  if (btn) {
+    event.preventDefault();
+    toggleSaveProduct(btn.getAttribute('data-save-product'), btn);
+    return;
+  }
+  const cropBtn = event.target?.closest?.('[data-dash-crop]');
+  if (cropBtn) {
+    const crop = cropBtn.getAttribute('data-dash-crop');
+    const action = cropBtn.getAttribute('data-crop-action');
+    if (action === 'add') addMyCrop(crop, cropBtn);
+    else removeMyCrop(crop, cropBtn);
+    return;
+  }
+  const unsaveBtn = event.target?.closest?.('[data-unsave-product]');
+  if (unsaveBtn) {
+    toggleSaveProduct(unsaveBtn.getAttribute('data-unsave-product'), unsaveBtn);
+  }
+});
 
 function renderProductCards(products, recommendedOnly = false, cropKey = null, diseaseObj = null) {
   isRecommendedMode = recommendedOnly;
@@ -1373,6 +1562,7 @@ async function refreshAuthUser() {
     currentUser = null;
   }
   renderUserArea();
+  renderDashboard();
 }
 
 async function logoutUser() {
@@ -1382,8 +1572,18 @@ async function logoutUser() {
     // Even on failure, clear local state.
   }
   currentUser = null;
+  dashSummary = null;
+  dashRecentScans = [];
+  dashDiseaseHistory = [];
+  dashMyCrops = [];
+  dashSaved = [];
+  dashSavedIds = [];
+  dashError = '';
+  dashEditingProfile = false;
   renderUserArea();
   loadScanHistory();
+  renderDashboard();
+  renderFilteredCards();
   showMessage(text('authLoggedOut'), 'success');
 }
 
@@ -1413,9 +1613,10 @@ async function handleSignup(event) {
     event.target.reset();
     renderUserArea();
     loadScanHistory();
+    await loadDashboardData();
     showMessage(text('authSignupSuccess'), 'success');
     // After successful signup the user is already logged in — go to the dashboard.
-    $('scan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (error) {
     const map = {
       duplicate_mobile: 'authDuplicateMobile',
@@ -1452,12 +1653,274 @@ async function handleLogin(event) {
     event.target.reset();
     renderUserArea();
     loadScanHistory();
+    await loadDashboardData();
     showMessage(`${text('authLoginSuccess')}${currentUser.name}`, 'success');
-    $('scan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (error) {
     authError(error.data?.error === 'invalid_credentials' ? 'authInvalidCredentials' : 'authSomethingWentWrong');
   } finally {
     setAuthSubmitting(event.target, false);
+  }
+}
+
+/* ============================================================================
+   PHASE 1 FARMER DASHBOARD (profile / crops / scans / diseases / saved)
+   ============================================================================ */
+
+async function loadDashboardData() {
+  if (!currentUser) {
+    dashSummary = null;
+    dashRecentScans = [];
+    dashDiseaseHistory = [];
+    dashMyCrops = [];
+    dashSaved = [];
+    dashSavedIds = [];
+    dashLoading = false;
+    dashError = '';
+    renderDashboard();
+    return;
+  }
+  dashLoading = true;
+  dashError = '';
+  renderDashboard();
+  try {
+    const [summaryRes, scansRes, diseaseRes, cropsRes, savedRes] = await Promise.all([
+      requestJson('/api/dashboard/summary'),
+      requestJson('/api/scans'),
+      requestJson('/api/dashboard/disease-history'),
+      requestJson('/api/crops/mine'),
+      requestJson('/api/products/saved')
+    ]);
+    if (summaryRes?.user) currentUser = summaryRes.user;
+    dashSummary = summaryRes?.summary || null;
+    dashRecentScans = Array.isArray(scansRes) ? scansRes.slice(0, 6) : [];
+    dashDiseaseHistory = Array.isArray(diseaseRes) ? diseaseRes.slice(0, 20) : [];
+    dashSupportedCrops = Array.isArray(cropsRes?.supported) ? cropsRes.supported : [];
+    dashMyCrops = Array.isArray(cropsRes?.mine) ? cropsRes.mine : [];
+    dashSaved = Array.isArray(savedRes?.saved) ? savedRes.saved : [];
+    dashSavedIds = Array.isArray(savedRes?.savedIds) ? savedRes.savedIds.map(Number) : [];
+  } catch (err) {
+    dashError = text('dashLoadError');
+  } finally {
+    dashLoading = false;
+    renderDashboard();
+    renderUserArea();
+    renderFilteredCards();
+  }
+}
+
+function cropLabel(key) {
+  const k = String(key || '').toLowerCase();
+  return cropNames[k]?.[lang] || cropNames[k]?.en || key;
+}
+
+function formatScanDate(value) {
+  if (!value) return '—';
+  try {
+    const v = String(value).includes('T') ? value : `${value}Z`;
+    return new Date(v).toLocaleString();
+  } catch {
+    return String(value);
+  }
+}
+
+window.toggleProfileEdit = function (editing) {
+  dashEditingProfile = Boolean(editing);
+  renderDashboard();
+};
+
+window.loadDashboardData = loadDashboardData;
+
+async function addMyCrop(crop, btn) {
+  if (!currentUser) return openAuthModal('login');
+  if (btn) btn.disabled = true;
+  try {
+    const data = await requestJson('/api/crops/mine', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ crop })
+    });
+    dashSupportedCrops = data.supported || dashSupportedCrops;
+    dashMyCrops = data.mine || [];
+    renderDashboard();
+  } catch {
+    showMessage(text('dashLoadError'), 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function removeMyCrop(crop, btn) {
+  if (!currentUser) return openAuthModal('login');
+  if (btn) btn.disabled = true;
+  try {
+    const data = await requestJson(`/api/crops/mine/${encodeURIComponent(crop)}`, { method: 'DELETE' });
+    dashMyCrops = data.mine || [];
+    renderDashboard();
+  } catch {
+    showMessage(text('dashLoadError'), 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function toggleSaveProduct(productId, btn) {
+  if (!currentUser) return openAuthModal('login');
+  const pid = Number(productId);
+  if (!Number.isInteger(pid) || pid <= 0) return;
+  const saved = dashSavedIds.includes(pid);
+  if (btn) btn.disabled = true;
+  try {
+    const data = saved
+      ? await requestJson(`/api/products/saved/${pid}`, { method: 'DELETE' })
+      : await requestJson('/api/products/saved', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId: pid })
+        });
+    dashSaved = data.saved || [];
+    dashSavedIds = (data.savedIds || []).map(Number);
+    renderDashboard();
+    renderFilteredCards();
+  } catch {
+    showMessage(text('dashLoadError'), 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function renderDashStats(s) {
+  return `
+    <div class="dashStats">
+      <div class="dashStat"><span class="dashStatNum">${s.totalScans ?? 0}</span><span>${escapeHtml(text('statTotalScans'))}</span></div>
+      <div class="dashStat"><span class="dashStatNum">${s.cropsScanned ?? 0}</span><span>${escapeHtml(text('statCropsScanned'))}</span></div>
+      <div class="dashStat"><span class="dashStatNum">${s.diagnosed ?? 0}</span><span>${escapeHtml(text('statDiagnosed'))}</span></div>
+      <div class="dashStat"><span class="dashStatNum">${s.healthy ?? 0}</span><span>${escapeHtml(text('statHealthy'))}</span></div>
+      <div class="dashStat"><span class="dashStatNum">${s.uncertain ?? 0}</span><span>${escapeHtml(text('statUncertain'))}</span></div>
+      <div class="dashStat"><span class="dashStatNum">${s.lastCrop ? escapeHtml(cropLabel(s.lastCrop)) : '—'}</span><span>${escapeHtml(text('statLastCrop'))}</span></div>
+    </div>`;
+}
+
+function renderDashRecent() {
+  if (!dashRecentScans.length) {
+    return `<div class="emptyCard">📷 ${escapeHtml(text('recentScansEmpty'))}<br><small>${escapeHtml(text('recentScansHint'))}</small></div>`;
+  }
+  return dashRecentScans.map((scan) => `
+    <div class="dashScanCard">
+      <div class="historyTop"><span class="historyCrop">🌱 ${escapeHtml(cropLabel(scan.crop))}</span>
+      <span class="historyMode model">${escapeHtml(scan.status || '')}</span></div>
+      <div class="historyDisease">${escapeHtml(scan.predicted_disease || '—')}</div>
+      <div class="historyMeta"><span>${escapeHtml(text('confidenceLabel'))}: <b>${Math.round((scan.confidence || 0) * 100)}%</b></span><span>${escapeHtml(formatScanDate(scan.created_at))}</span></div>
+    </div>`).join('');
+}
+
+function renderDashDiseases() {
+  if (!dashDiseaseHistory.length) return `<div class="emptyCard">🦠 ${escapeHtml(text('diseaseHistoryEmpty'))}</div>`;
+  return dashDiseaseHistory.map((scan) => `
+    <div class="dashRow">
+      <span>🌾 ${escapeHtml(cropLabel(scan.crop))} — 🦠 ${escapeHtml(scan.predicted_disease || '—')}</span>
+      <span class="dashRowMeta">${Math.round((scan.confidence || 0) * 100)}% • ${escapeHtml(formatScanDate(scan.created_at))}</span>
+    </div>`).join('');
+}
+
+function renderDashCrops() {
+  const myCropSet = new Set(dashMyCrops.map((c) => String(c.crop || '').toLowerCase()));
+  const supported = dashSupportedCrops.length ? dashSupportedCrops : Object.keys(cropNames);
+  const mine = dashMyCrops.length
+    ? `<p class="muted"><b>${escapeHtml(text('addedCrops'))}:</b> ${dashMyCrops.map((c) => `
+      <span class="cropChip">${escapeHtml(cropLabel(c.crop))}
+        <button type="button" data-dash-crop="${escapeHtml(c.crop)}" data-crop-action="remove">✕</button>
+      </span>`).join(' ')}</p>`
+    : `<div class="emptyCard">🌾 ${escapeHtml(text('myCropsEmpty'))}<br><small>${escapeHtml(text('myCropsEmptyHint'))}</small></div>`;
+  const grid = supported.map((crop) => {
+    const selected = myCropSet.has(String(crop).toLowerCase());
+    return `<button type="button" class="cropPick ${selected ? 'selected' : ''}" data-dash-crop="${escapeHtml(crop)}" data-crop-action="${selected ? 'remove' : 'add'}">
+      <span>${selected ? '✅' : '➕'} ${escapeHtml(cropLabel(crop))}</span>
+      <small>${escapeHtml(selected ? text('removeCrop') : text('addCrop'))}</small>
+    </button>`;
+  }).join('');
+  return `${mine}<div class="cropPickGrid">${grid}</div>`;
+}
+
+function renderDashSaved() {
+  if (!dashSaved.length) return `<div class="emptyCard">💊 ${escapeHtml(text('savedProductsEmpty'))}<br><small>${escapeHtml(text('savedProductsHint'))}</small></div>`;
+  return dashSaved.map((p) => {
+    const name = p[`name_${lang}`] || p.name_mr || p.name_en || p.name;
+    return `<div class="dashRow"><span>💊 ${escapeHtml(name)}</span>
+      <span><button type="button" class="btn secondary tinyBtn" onclick="openProductDetails('${escapeHtml(p.id)}')">${escapeHtml(text('viewResult'))}</button>
+      <button type="button" class="btn secondary tinyBtn" data-unsave-product="${escapeHtml(p.id)}">${escapeHtml(text('unsaveProduct'))}</button></span></div>`;
+  }).join('');
+}
+
+function renderDashProfile() {
+  if (dashEditingProfile) {
+    return `<form id="dashProfileForm" class="dashProfileForm">
+      <label>${escapeHtml(text('profileName'))}<input id="dashProfileName" value="${escapeHtml(currentUser.name || '')}" required></label>
+      <label>${escapeHtml(text('profileEmail'))}<input id="dashProfileEmail" type="email" value="${escapeHtml(currentUser.email || '')}"></label>
+      <div class="dashProfileActions">
+        <button type="submit" class="btn">💾 ${escapeHtml(text('profileSave'))}</button>
+        <button type="button" class="btn secondary" onclick="toggleProfileEdit(false)">${escapeHtml(text('profileCancel'))}</button>
+      </div>
+    </form>`;
+  }
+  return `<div class="dashProfileView">
+    <p><b>👤 ${escapeHtml(text('profileName'))}:</b> ${escapeHtml(currentUser.name || '—')}</p>
+    <p><b>📱 ${escapeHtml(text('profileMobile'))}:</b> ${escapeHtml(currentUser.mobile || '—')}</p>
+    <p><b>✉️ ${escapeHtml(text('profileEmail'))}:</b> ${escapeHtml(currentUser.email || text('profileEmailEmpty'))}</p>
+    <button type="button" class="btn secondary" onclick="toggleProfileEdit(true)">✏️ ${escapeHtml(text('profileEdit'))}</button>
+  </div>`;
+}
+
+function renderDashboard() {
+  const root = $('dashboardPanels');
+  if (!root) return;
+  const head = $('dashHello');
+  const sub = $('dashSub');
+  if (!currentUser) {
+    if (head) head.textContent = text('dashTitle');
+    if (sub) sub.textContent = text('dashSub');
+    root.innerHTML = `<div class="dashLoginPrompt"><p>👤 ${escapeHtml(text('dashLoginNeeded'))}</p><button type="button" class="btn" onclick="openAuthModal('login')">👤 ${escapeHtml(text('login'))}</button></div>`;
+    return;
+  }
+  if (dashLoading) {
+    root.innerHTML = `<div class="dashLoading"><div class="loader"></div><p>${escapeHtml(text('dashLoading'))}</p></div>`;
+    return;
+  }
+  if (dashError) {
+    root.innerHTML = `<div class="dashErrorCard"><p>⚠️ ${escapeHtml(dashError)}</p><button type="button" class="btn secondary" onclick="loadDashboardData()">${escapeHtml(text('dashRetry'))}</button></div>`;
+    return;
+  }
+  const s = dashSummary || { totalScans: 0, cropsScanned: 0, diagnosed: 0, healthy: 0, uncertain: 0, lastCrop: null };
+  if (head) head.textContent = `${text('dashTitle')} — ${currentUser.name || ''}`;
+  if (sub) sub.textContent = text('dashSub');
+  root.innerHTML = `
+    ${renderDashStats(s)}
+    <div class="dashGrid">
+      <section class="dashCard"><h3>${escapeHtml(text('myCropsTitle'))}</h3><p class="muted">${escapeHtml(text('myCropsSub'))}</p>${renderDashCrops()}</section>
+      <section class="dashCard"><h3>${escapeHtml(text('recentScansTitle'))}</h3><div class="dashScanList">${renderDashRecent()}</div></section>
+      <section class="dashCard"><h3>${escapeHtml(text('diseaseHistoryTitle'))}</h3><p class="muted">${escapeHtml(text('diseaseHistorySub'))}</p><div class="dashRows">${renderDashDiseases()}</div></section>
+      <section class="dashCard"><h3>${escapeHtml(text('savedProductsTitle'))}</h3><p class="muted">${escapeHtml(text('savedProductsSub'))}</p><div class="dashRows">${renderDashSaved()}</div></section>
+      <section class="dashCard"><h3>${escapeHtml(text('profileTitle'))}</h3><div>${renderDashProfile()}</div></section>
+    </div>`;
+  const form = $('dashProfileForm');
+  if (form) form.addEventListener('submit', submitDashProfile);
+}
+
+async function submitDashProfile(event) {
+  event.preventDefault();
+  try {
+    const data = await requestJson('/api/auth/profile', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: $('dashProfileName').value, email: $('dashProfileEmail').value })
+    });
+    currentUser = data.user;
+    dashEditingProfile = false;
+    renderUserArea();
+    renderDashboard();
+    showMessage(text('profileUpdated'), 'success');
+  } catch (err) {
+    showMessage(text('profileUpdateError'), 'error');
   }
 }
 
@@ -1494,6 +1957,8 @@ async function loadInitialData() {
   }
 
   loadScanHistory();
+
+  loadDashboardData();
 }
 
 /* ============================================================================
@@ -1505,6 +1970,7 @@ $('lang').onchange = (event) => {
   renderLang();
   renderUserArea();
   loadScanHistory();
+  renderDashboard();
 };
 
 $('file').onchange = (event) => {
@@ -1587,8 +2053,10 @@ if ($('loginForm')) $('loginForm').addEventListener('submit', handleLogin);
 if ($('signupForm')) $('signupForm').addEventListener('submit', handleSignup);
 
 renderLang();
+renderDashboard();
 refreshAuthUser().finally(() => {
   loadInitialData();
+  loadDashboardData();
 });
 
 // PWA: register the service worker (static shell caching only).

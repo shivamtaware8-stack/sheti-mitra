@@ -12,6 +12,7 @@
 <header>
   <div class="brand"><div class="logo">🌱</div><div><b>ShetiMitra AI</b><small id="tag">शेतीचा स्मार्ट साथीदार</small></div></div>
   <nav>
+    <a href="#dashboard" id="navDash">डॅशबोर्ड</a>
     <a href="#scan" id="navScan">रोग स्कॅन</a>
     <a href="#medicines" id="navMed">औषधे</a>
     <a href="#history" id="navHistory">इतिहास</a>
@@ -30,6 +31,22 @@
       <a class="btn" href="#scan" id="heroBtn">आता स्कॅन करा →</a>
     </div>
     <div class="heroArt">🌾<span>📱</span>🌿</div>
+  </section>
+
+  <section id="dashboard" class="panel dashPanel">
+    <div class="sectionHead">
+      <div><span class="eyebrow">DASHBOARD / डॅशबोर्ड</span><h2 id="dashHello">शेतकरी डॅशबोर्ड</h2><p id="dashSub" class="muted">नमस्कार! तुमच्या पिकांची माहिती एका ठिकाणी पहा.</p></div>
+      <a class="btn" href="#scan" id="dashScanBtn">🌾 पीक स्कॅन करा</a>
+    </div>
+    <div class="dashTabs" role="navigation" aria-label="Dashboard">
+      <a href="#dashboard" data-dashtab>🏠</a>
+      <a href="#dashboard" data-dashtab>🌾</a>
+      <a href="#dashboard" data-dashtab>📷</a>
+      <a href="#dashboard" data-dashtab>🦠</a>
+      <a href="#dashboard" data-dashtab>💊</a>
+      <a href="#dashboard" data-dashtab>👤</a>
+    </div>
+    <div id="dashboardPanels" aria-live="polite"></div>
   </section>
 
   <section id="scan" class="panel">

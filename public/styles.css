@@ -912,3 +912,44 @@
     display: none;
   }
 }
+
+/* ---- Phase 1 Farmer Dashboard (lightweight, responsive, existing style) ---- */
+.dashPanel { background: linear-gradient(180deg, #fff, #f4faf4); }
+.dashTabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 4px; }
+.dashTabs a { background: #eef7ef; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; font-size: 18px; text-decoration: none; }
+.dashStats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 14px 0; }
+.dashStat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 10px; text-align: center; display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+.dashStatNum { font-size: 22px; font-weight: 800; color: var(--ink); }
+.dashGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dashCard { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+.dashCard h3 { margin: 0 0 6px; }
+.dashScanList { display: grid; gap: 10px; }
+.dashScanCard { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fbfdfb; }
+.dashRows { display: grid; gap: 8px; }
+.dashRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #fbfdfb; font-size: 14px; }
+.dashRowMeta { color: var(--muted); font-size: 12px; }
+.cropPickGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.cropPick { border: 1px solid var(--line); background: #fbfdfb; border-radius: 14px; padding: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: var(--ink); }
+.cropPick small { font-weight: 600; color: var(--leaf); }
+.cropPick.selected { background: #e8f5e9; border-color: #a5d6a7; }
+.cropChip { display: inline-flex; align-items: center; gap: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 999px; padding: 4px 8px; margin: 2px; font-size: 13px; }
+.cropChip button { border: 0; background: transparent; cursor: pointer; font-size: 13px; }
+.saveProductBtn { margin-top: 8px; width: 100%; }
+.dashProfileForm { display: grid; gap: 10px; }
+.dashProfileForm label { display: grid; gap: 6px; font-weight: 700; }
+.dashProfileForm input { border: 1.5px solid #dfe9e1; border-radius: 12px; padding: 10px 12px; font-size: 15px; }
+.dashProfileActions { display: flex; gap: 8px; flex-wrap: wrap; }
+.dashLoginPrompt, .dashLoading, .dashErrorCard { text-align: center; padding: 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+@media (max-width: 900px) {
+  .dashStats { grid-template-columns: repeat(3, 1fr); }
+  .dashGrid { grid-template-columns: 1fr; }
+  .cropPickGrid { grid-template-columns: repeat(2, 1fr); }
+  header { padding: 0 4vw; }
+  nav { gap: 10px; }
+  nav a { font-size: 12px; }
+}
+@media (max-width: 520px) {
+  .dashStats { grid-template-columns: repeat(2, 1fr); }
+  .cropPickGrid { grid-template-columns: 1fr 1fr; }
+  .dashRow { flex-direction: column; align-items: flex-start; }
+}
